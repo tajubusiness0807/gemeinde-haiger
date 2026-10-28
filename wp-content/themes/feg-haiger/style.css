@@ -1,0 +1,381 @@
+/*
+Theme Name: FeG Haiger
+Theme URI: https://haiger.feg.de/
+Author: Freie evangelische Gemeinde Haiger
+Description: Block-Theme für die Website der Freien evangelischen Gemeinde Haiger. Nachbau des bisherigen Joomla-Designs (Purity III) als modernes WordPress-Block-Theme mit Seitenbannern, Info-Seitenleisten, Startseiten-Slideshow und Terminvorschau.
+Requires at least: 6.6
+Tested up to: 7.1
+Requires PHP: 7.4
+Version: 1.0.0
+License: GNU General Public License v2 or later
+License URI: https://www.gnu.org/licenses/gpl-2.0.html
+Text Domain: feg-haiger
+Tags: block-patterns, full-site-editing, one-column, two-columns, custom-colors, editor-style
+*/
+
+/* ---------- Kopfbereich ---------- */
+
+.feg-header {
+	position: sticky;
+	top: 0;
+	z-index: 100;
+	box-shadow: 0 1px 0 rgba(0, 0, 0, 0.06);
+}
+
+.admin-bar .feg-header {
+	top: var(--wp-admin--admin-bar--height, 0);
+}
+
+.feg-header .wp-block-site-logo img {
+	height: auto;
+}
+
+.feg-header .wp-block-navigation {
+	text-transform: uppercase;
+	letter-spacing: 0.01em;
+}
+
+.feg-header .wp-block-navigation .wp-block-navigation__submenu-container {
+	text-transform: none;
+	border: 1px solid var(--wp--preset--color--border) !important;
+	box-shadow: 0 6px 12px rgba(0, 0, 0, 0.12);
+	min-width: 230px !important;
+	padding: 6px 0;
+}
+
+.feg-header .wp-block-navigation .wp-block-navigation__submenu-container .wp-block-navigation-item__content {
+	padding: 6px 18px;
+}
+
+.feg-header .wp-block-navigation .wp-block-navigation-item__content:hover,
+.feg-header .wp-block-navigation .current-menu-item > .wp-block-navigation-item__content,
+.feg-header .wp-block-navigation .current-menu-ancestor > .wp-block-navigation-item__content {
+	color: var(--wp--preset--color--primary);
+}
+
+/* Untermenüs der 3. Ebene eingerückt statt ausklappend darstellen (wie bisheriges Mega-Menü). */
+@media (min-width: 600px) {
+	.feg-header .wp-block-navigation__submenu-container .wp-block-navigation__submenu-container {
+		position: static !important;
+		opacity: 1 !important;
+		visibility: visible !important;
+		width: auto !important;
+		height: auto !important;
+		border: 0 !important;
+		box-shadow: none;
+		padding: 0 0 4px 14px;
+		min-width: 0 !important;
+	}
+
+	.feg-header .wp-block-navigation__submenu-container .wp-block-navigation-submenu__toggle,
+	.feg-header .wp-block-navigation__submenu-container .wp-block-navigation__submenu-icon {
+		display: none !important;
+	}
+
+	.feg-header .wp-block-navigation__submenu-container > .has-child > .wp-block-navigation-item__content {
+		font-weight: 600;
+	}
+
+	.feg-header .wp-block-navigation__submenu-container .wp-block-navigation__submenu-container .wp-block-navigation-item__content {
+		font-size: 0.95em;
+		padding: 4px 18px 4px 12px;
+	}
+}
+
+/* ---------- Seitenbanner (Bereichsbild mit Überschrift) ---------- */
+
+.feg-banner.wp-block-cover {
+	border-bottom: 25px solid var(--wp--preset--color--banner-green);
+}
+
+.feg-banner .wp-block-heading {
+	font-family: Georgia, "Times New Roman", serif;
+	text-shadow: 0 1px 6px rgba(0, 0, 0, 0.55);
+}
+
+/* ---------- Seitenleiste (Infobox rechts) ---------- */
+
+.feg-sidebar {
+	font-size: var(--wp--preset--font-size--small);
+}
+
+.feg-sidebar p {
+	margin-block: 0 0.65em;
+}
+
+.feg-sidebar .wp-block-image {
+	margin-block: 0 12px;
+}
+
+.feg-sidebar .wp-block-heading {
+	margin-top: 0;
+}
+
+.feg-sidebar table td {
+	border: 0;
+	padding: 5px 6px 5px 0;
+	vertical-align: top;
+}
+
+/* ---------- Kleine Buttons (z.B. „E-Mail“) ---------- */
+
+.wp-block-button.is-style-feg-klein .wp-block-button__link {
+	font-size: 0.8rem;
+	padding: 2px 6px;
+	border-radius: 0;
+	text-transform: none;
+}
+
+.wp-block-buttons.feg-inline {
+	display: inline-flex;
+	vertical-align: middle;
+	margin: 0 0 0 4px;
+}
+
+/* ---------- Bildrahmen wie bisher („img-thumbnail“) ---------- */
+
+.wp-block-image.is-style-feg-rahmen img,
+.wp-block-post-featured-image.is-style-feg-rahmen img {
+	border: 1px solid var(--wp--preset--color--border);
+	padding: 4px;
+	background: #fff;
+}
+
+/* ---------- Teaser-Karten auf der Startseite ---------- */
+
+.feg-teaser .wp-block-buttons {
+	margin-top: auto;
+}
+
+.feg-teaser > .wp-block-column {
+	display: flex;
+	flex-direction: column;
+}
+
+/* ---------- Slideshow auf der Startseite ---------- */
+
+.feg-slider {
+	position: relative;
+	overflow: hidden;
+}
+
+.feg-slider > .wp-block-cover:not(:first-child) {
+	position: absolute;
+	inset: 0;
+}
+
+.feg-slider.is-ready > .wp-block-cover {
+	opacity: 0;
+	visibility: hidden;
+	transition: opacity 0.9s ease, visibility 0s linear 0.9s;
+}
+
+.feg-slider.is-ready > .wp-block-cover.is-active {
+	opacity: 1;
+	visibility: visible;
+	transition: opacity 0.9s ease, visibility 0s;
+}
+
+.feg-slider.is-ready > .wp-block-cover.is-active .wp-block-cover__image-background {
+	animation: feg-kenburns 9s ease-out both;
+}
+
+@keyframes feg-kenburns {
+	from { transform: scale(1); }
+	to { transform: scale(1.08); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.feg-slider.is-ready > .wp-block-cover.is-active .wp-block-cover__image-background {
+		animation: none;
+	}
+}
+
+.feg-slider__box {
+	background: rgba(255, 255, 255, 0.85);
+	border-radius: 12px;
+}
+
+.feg-slider__nav {
+	position: absolute;
+	left: 0;
+	right: 0;
+	bottom: 14px;
+	display: flex;
+	justify-content: center;
+	gap: 10px;
+	z-index: 3;
+}
+
+.feg-slider__dot {
+	width: 13px;
+	height: 13px;
+	padding: 0;
+	border-radius: 50%;
+	border: 2px solid #fff;
+	background: transparent;
+	cursor: pointer;
+	box-shadow: 0 0 3px rgba(0, 0, 0, 0.4);
+}
+
+.feg-slider__dot[aria-current="true"] {
+	background: #fff;
+}
+
+@media (max-width: 781px) {
+	.feg-slider > .wp-block-cover {
+		min-height: 380px !important;
+	}
+
+	.feg-slider .feg-slider__box,
+	.feg-slider .wp-block-heading {
+		font-size: 1.2rem !important;
+	}
+}
+
+/* ---------- Fußbereich ---------- */
+
+.feg-footer a {
+	color: inherit;
+	text-decoration: none;
+}
+
+.feg-footer a:hover {
+	color: var(--wp--preset--color--primary);
+}
+
+.feg-footer-links p {
+	margin: 0;
+	padding: 8px 0;
+	border-bottom: 1px solid #ccc;
+}
+
+.feg-footer-links p:last-child {
+	border-bottom: 0;
+}
+
+.feg-footer-links p::before {
+	content: "›";
+	color: var(--wp--preset--color--primary);
+	font-weight: 700;
+	margin-right: 6px;
+}
+
+.feg-footer-kontakt p {
+	margin: 0 0 10px;
+	padding-left: 28px;
+	position: relative;
+}
+
+.feg-footer-kontakt p::before {
+	content: "";
+	position: absolute;
+	left: 0;
+	top: 4px;
+	width: 17px;
+	height: 17px;
+	background: var(--wp--preset--color--primary);
+	-webkit-mask: var(--feg-icon) center / contain no-repeat;
+	mask: var(--feg-icon) center / contain no-repeat;
+}
+
+.feg-icon-haus { --feg-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 3 1 12h3v9h6v-6h4v6h6v-9h3z'/%3E%3C/svg%3E"); }
+.feg-icon-mail { --feg-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M2 4h20v3l-10 6L2 7zm0 5.3 10 6 10-6V20H2z'/%3E%3C/svg%3E"); }
+.feg-icon-karte { --feg-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M2 5h20v3H2zm0 5h20v9H2zm3 5v2h6v-2z'/%3E%3C/svg%3E"); }
+
+/* ---------- Nach-oben-Button ---------- */
+
+.feg-nach-oben {
+	position: fixed;
+	right: 20px;
+	bottom: 20px;
+	width: 44px;
+	height: 44px;
+	border: 0;
+	background: var(--wp--preset--color--primary);
+	color: #fff;
+	cursor: pointer;
+	opacity: 0;
+	pointer-events: none;
+	transition: opacity 0.3s;
+	z-index: 90;
+}
+
+.feg-nach-oben.is-visible {
+	opacity: 1;
+	pointer-events: auto;
+}
+
+.feg-nach-oben svg {
+	width: 18px;
+	height: 18px;
+	fill: currentColor;
+}
+
+/* ---------- Google-Kalender / Einbettungen ---------- */
+
+.feg-kalender iframe {
+	width: 100%;
+	min-height: 600px;
+	border: 0;
+}
+
+.feg-slider__box--rechts {
+	align-self: flex-end;
+	max-width: 320px;
+}
+
+.feg-slider .wp-block-heading a {
+	color: inherit;
+	text-decoration: none;
+}
+
+/* ---------- Aus Joomla übernommene Inhalte ---------- */
+
+/* Kleiner „E-Mail“-Button innerhalb eines Textes */
+a.feg-btn-klein {
+	display: inline-block;
+	padding: 1px 6px;
+	font-size: 0.8rem;
+	line-height: 1.5;
+	background: var(--wp--preset--color--primary);
+	color: #fff;
+	text-decoration: none;
+	vertical-align: baseline;
+}
+
+a.feg-btn-klein:hover {
+	background: var(--wp--preset--color--primary-dark);
+	color: #fff;
+	text-decoration: none;
+}
+
+.feg-einrueckung {
+	padding-left: 30px;
+}
+
+.feg-bildraster figcaption {
+	font-weight: 600;
+	color: var(--wp--preset--color--primary);
+	text-align: center;
+}
+
+.feg-bildraster img {
+	aspect-ratio: 4 / 3;
+	object-fit: cover;
+	width: 100%;
+}
+
+.wp-block-table.feg-tabelle td {
+	border: 0;
+	padding: 5px 8px 5px 0;
+	vertical-align: top;
+}
+
+.feg-sidebar .wp-block-heading {
+	font-size: var(--wp--preset--font-size--large);
+}
+
+.feg-teaser .wp-block-image {
+	margin-bottom: 1.25rem;
+}

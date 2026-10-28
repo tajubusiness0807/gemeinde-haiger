@@ -1,0 +1,65 @@
+.feg-kontakt form p {
+	margin: 0 0 12px;
+}
+
+.feg-kontakt label {
+	display: block;
+	font-size: 0.9em;
+	margin-bottom: 3px;
+}
+
+.feg-kontakt input[type="text"],
+.feg-kontakt input[type="email"],
+.feg-kontakt textarea {
+	width: 100%;
+	box-sizing: border-box;
+	padding: 8px 10px;
+	border: 1px solid #ccc;
+	border-radius: 3px;
+	font: inherit;
+	background: #fff;
+}
+
+.feg-kontakt__zustimmung {
+	display: flex;
+	gap: 8px;
+	align-items: flex-start;
+}
+
+.feg-kontakt__zustimmung input {
+	margin-top: 4px;
+}
+
+.feg-kontakt__zustimmung label {
+	display: inline;
+	font-size: 0.85em;
+}
+
+.feg-kontakt__honig {
+	position: absolute !important;
+	left: -9999px !important;
+	width: 1px;
+	height: 1px;
+	overflow: hidden;
+}
+
+.feg-kontakt__meldung {
+	padding: 10px 14px;
+	margin-bottom: 14px;
+	border-left: 4px solid;
+}
+
+.feg-kontakt__meldung ul {
+	margin: 0;
+	padding-left: 1.1em;
+}
+
+.feg-kontakt__meldung--ok {
+	background: #e8f6ee;
+	border-color: #3e9b52;
+}
+
+.feg-kontakt__meldung--fehler {
+	background: #fdecea;
+	border-color: #cc0000;
+}
